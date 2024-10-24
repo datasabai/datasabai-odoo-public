@@ -1,2 +1,2 @@
-# datasabai-odoo-oca
-Public OCA modules for Odoo by Datasabai
+# datasabai-odoo-public
+Public modules for Odoo by Datasabai
