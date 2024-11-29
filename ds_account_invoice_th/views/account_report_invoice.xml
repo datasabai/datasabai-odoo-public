@@ -79,7 +79,9 @@
                    t-value="list(payment for payment in payments_vals if payment.get('is_exchange') == 0)" />
                 <t t-set="display_payment_template" t-value="print_with_payments and o.payment_state != 'invoicing_legacy' and filtered_payments" />
                 <t t-if="o.move_type == 'out_invoice' and o.state == 'posted'">
-                    <span t-if="o.company_id.account_fiscal_country_id.code == 'TH' and not commercial_invoice and display_payment_template">Tax Invoice</span>
+                    <span t-if="o.company_id.account_fiscal_country_id.code == 'TH' 
+                                and not commercial_invoice and display_payment_template 
+                                and o.amount_tax > 0">Tax Invoice</span>
                     <span t-else="">Invoice</span>
                 </t>
             </xpath>
