@@ -5,10 +5,8 @@
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='invoice_date']" position="after">
-                <!-- <field name="x_ds_tax_invoice_date"
-                    invisible="move_type not in ('out_invoice', 'out_refund', 'out_receipt') or payment_state not in
-                ('in_payment', 'paid', 'partial', 'reversed', 'invoicing_legacy')"/> -->
-                <field name="x_ds_tax_invoice_date" />
+                <field name="x_ds_tax_invoice_date"
+                    invisible="move_type not in ('out_invoice', 'out_refund', 'out_receipt')"/>
             </xpath>
         </field>
     </record>
