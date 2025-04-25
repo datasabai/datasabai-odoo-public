@@ -1,6 +1,6 @@
 {
     "name": "Import Kasikorn bank statement in CSV file",
-    "version": "1.0",
+    'version': '18.0.0.0.1',
     'description': r'''
 Module to import Kasikorn bank statements in CSV file.
 ======================================================
