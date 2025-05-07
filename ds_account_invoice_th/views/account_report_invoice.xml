@@ -7,7 +7,6 @@
                 t-value="o.company_id.account_fiscal_country_id.code == 'TH' 
                         and not commercial_invoice 
                         and print_with_payments 
-                        and o.amount_tax > 0
                         and o.x_ds_tax_invoice_date" />
             <t t-if="o.move_type == 'out_invoice' and o.state == 'posted'">
                 <span t-if="display_payment_template">Tax Invoice</span>
