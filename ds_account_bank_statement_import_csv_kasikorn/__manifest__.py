@@ -1,6 +1,6 @@
 {
     "name": "Import Kasikorn bank statement in CSV file",
-    "version": "1.0",
+    'version': '19.0.1.0',
     'description': r'''
 Module to import Kasikorn bank statements in CSV file.
 ======================================================
@@ -15,14 +15,12 @@ Important Note
     # "description": "Allow Odoo to import Kasikorn bank statement",
     "author": "Weexa",
     "website": "http://www.weexa.com",
-    'license': 'OEEL-1',
+    'license': 'LGPL-3',
     "category": "Accounting/Accounting",
     "application": False,
     "installable": True,
     "auto_install": False,
 
-    "depends": ['account_bank_statement_import_csv'],
-    "data": [
-    ],
+    "depends": ['accountant', 'account_bank_statement_import_csv'],
 
 }

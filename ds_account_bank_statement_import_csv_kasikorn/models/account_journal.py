@@ -20,9 +20,9 @@ class AccountJournal(models.Model):
 
         if not self._check_file_format(attachments.name):
             return super()._import_bank_statement(attachments)
-        
-        attachments.raw = self.x_ds_preprocess_statement_kbank (attachments.raw)
-        # return super()._import_bank_statement(attachments)
+# --- ds changes -- start
+        attachments.raw = self.ds_preprocess_statement_kbank (attachments.raw)
+# --- ds changes -- end
         ctx = dict(self.env.context)
         import_wizard = self.env['base_import.import'].create({
             'res_model': 'account.bank.statement.line',
@@ -32,17 +32,19 @@ class AccountJournal(models.Model):
         })
         ctx['wizard_id'] = import_wizard.id
         ctx['default_journal_id'] = self.id
+        ctx['attachment_ids'] = attachments.ids
         return {
             'type': 'ir.actions.client',
             'tag': 'import_bank_stmt',
             'params': {
                 'model': 'account.bank.statement.line',
                 'context': ctx,
-                'filename': 'bank_statement_import.csv',
+                'filename': attachments.name,
             }
         }
 
-    def x_ds_preprocess_statement_kbank(self, raw):
+    # Remove the extra lines in the beginning of Kasikorn bank statement csv
+    def ds_preprocess_statement_kbank(self, raw):
         data_file = raw.decode('utf-8')
         if not data_file:
             return raw

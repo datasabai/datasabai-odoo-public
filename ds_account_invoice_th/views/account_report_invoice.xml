@@ -1,42 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo><data>
     <template id="x_ds_l10n_th_report_invoice_document_inherit" inherit_id="l10n_th.report_invoice_document">
-        <!-- show Tax in title -->
-        <xpath expr="//h2/t[contains(@t-if, 'posted')]" position="replace">
+        <xpath expr="//t[@t-set='layout_document_title']" position="before">
             <t t-set="display_payment_template" 
                 t-value="o.company_id.account_fiscal_country_id.code == 'TH' 
                         and not commercial_invoice 
                         and print_with_payments 
                         and o.x_ds_tax_invoice_date" />
-            <t t-if="o.move_type == 'out_invoice' and o.state == 'posted'">
-                <span t-if="display_payment_template">Tax Invoice</span>
-                <span t-else="">Invoice</span>
-            </t>
+        </xpath>
+        <!-- show Tax in title -->
+        <xpath expr="//t[@name='invoice_title']" position="replace">
+            <t name="invoice_title" t-out="'Tax Invoice' if display_payment_template else 'Invoice'"/>
         </xpath>
         <!-- add suffix 'T' -->
         <xpath expr="//span[@t-field='o.name']" position="replace">
             <t t-if="display_payment_template">
-                <span t-esc="o.name + 'T'"/>
+                <span t-out="o.name + 'T'"/>
             </t>
             <t t-else="">
-                <span t-if="o.name != '/'" t-field="o.name">INV/2023/0001</span>
+                <span t-if="o.name and o.name != '/'" t-field="o.name">INV/2023/0001</span>
             </t>
         </xpath>
         <!-- show Tax Invoice Date instead of Invoice Date -->
-        <xpath expr="//span[@t-field='o.invoice_date']" position="replace">
+        <xpath expr="//div[@t-field='o.invoice_date']" position="replace">
             <t t-if="display_payment_template">
-                <span t-field="o.x_ds_tax_invoice_date"/>
+                <div t-field="o.x_ds_tax_invoice_date"/>
             </t>
             <t t-else="">
-                <span t-field="o.invoice_date">2023-09-12</span>
+                <div t-field="o.invoice_date">2023-09-12</div>
             </t>
         </xpath>
         <!-- remove Due Date -->
         <xpath expr="//div[@name='due_date']" position="replace">
             <t t-if="not display_payment_template">
-                <div t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
-                    <strong>Due Date:</strong><br/>
-                    <span t-field="o.invoice_date_due">2023-10-31</span>
+                <div class="col" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
+                    <strong>Due Date</strong>
+                    <div t-field="o.invoice_date_due">2023-10-31</div>
                 </div>
             </t>
         </xpath>
