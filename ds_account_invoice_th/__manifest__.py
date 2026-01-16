@@ -1,6 +1,6 @@
 {
     'name': 'Thailand Invoice',
-    'version': '19.0.1.0',
+    'version': '19.0.1.1',
     'summary': "Customizations for Compliance with Thai Invoice Regulations",
     'description': """
 This module customizes the standard module to ensure compliance with Thai invoice regulations.
