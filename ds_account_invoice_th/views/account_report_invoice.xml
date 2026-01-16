@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo><data>
+<odoo>
     <template id="x_ds_l10n_th_report_invoice_document_inherit" inherit_id="l10n_th.report_invoice_document">
         <xpath expr="//t[@t-set='layout_document_title']" position="before">
             <t t-set="display_payment_template" 
@@ -42,4 +42,4 @@
 
     </template>
         
-</data></odoo>
+</odoo>
