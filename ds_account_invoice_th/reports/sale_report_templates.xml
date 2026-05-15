@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="ds_report_saleorder_document" inherit_id="sale.report_saleorder_document">
+    <xpath expr="//div[@t-field='doc.date_order']" position="replace">
+        <t t-if="not doc.partner_id.ds_no_date">
+            <div t-field="doc.date_order" t-options='{"widget": "date"}'>2023-12-31</div>
+        </t>
+    </xpath>
+
+    <xpath expr="//div[@t-field='doc.validity_date']" position="replace">
+        <t t-if="not doc.partner_id.ds_no_date">
+            <div t-field="doc.validity_date">2023-12-31</div>
+        </t>
+    </xpath>
+
+</template>
+</odoo>

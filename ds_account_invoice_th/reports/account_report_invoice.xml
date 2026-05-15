@@ -23,19 +23,32 @@
         </xpath>
         <!-- show Tax Invoice Date instead of Invoice Date -->
         <xpath expr="//div[@t-field='o.invoice_date']" position="replace">
-            <t t-if="display_payment_template">
-                <div t-field="o.x_ds_tax_invoice_date"/>
-            </t>
-            <t t-else="">
-                <div t-field="o.invoice_date">2023-09-12</div>
+            <t t-if="not o.partner_id.ds_no_date">
+                <t t-if="display_payment_template">
+                    <div t-field="o.x_ds_tax_invoice_date"/>
+                </t>
+                <t t-else="">
+                    <div t-field="o.invoice_date">2023-09-12</div>
+                </t>
             </t>
         </xpath>
         <!-- remove Due Date -->
         <xpath expr="//div[@name='due_date']" position="replace">
-            <t t-if="not display_payment_template">
-                <div class="col" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
-                    <strong>Due Date</strong>
-                    <div t-field="o.invoice_date_due">2023-10-31</div>
+            <t t-if="not o.partner_id.ds_no_date">
+                <t t-if="not display_payment_template">
+                    <div class="col" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
+                        <strong>Due Date</strong>
+                        <div t-field="o.invoice_date_due">2023-10-31</div>
+                    </div>
+                </t>
+            </t>
+        </xpath>
+        <!-- remove Delivery Date -->
+        <xpath expr="//div[@name='delivery_date']" position="replace">
+            <t t-if="not o.partner_id.ds_no_date">
+                <div class="col" t-if="o.delivery_date" name="delivery_date">
+                    <strong>Delivery Date</strong>
+                    <div t-field="o.delivery_date">2023-09-25</div>
                 </div>
             </t>
         </xpath>
